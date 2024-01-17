@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "329581810847",
+    "project_id": "khokana-3e56d",
+    "storage_bucket": "khokana-3e56d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:329581810847:android:83b0c6717e745349dcfeaa",
+        "android_client_info": {
+          "package_name": "com.example.phonetest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeBMFk2HgyKNtAYAl0dKi0YS6GaHyj8TY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
