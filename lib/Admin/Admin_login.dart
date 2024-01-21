@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:phonetest/auth/CrudAdmin.dart';
+import 'package:phonetest/Admin/CrudAdmin.dart';
 
 class AdminLogin extends StatefulWidget {
   const AdminLogin({Key? key}) : super(key: key);

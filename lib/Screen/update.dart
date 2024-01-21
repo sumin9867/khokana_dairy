@@ -7,8 +7,8 @@ class UpdateContact extends StatefulWidget {
       required this.docID,
       required this.name,
       required this.phone,
-      required this.email});
-  final String docID, name, phone, email;
+      required this.job});
+  final String docID, name, phone, job;
 
   @override
   State<UpdateContact> createState() => _UpdateContactState();
@@ -16,16 +16,16 @@ class UpdateContact extends StatefulWidget {
 
 class _UpdateContactState extends State<UpdateContact> {
   TextEditingController _nameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
+
   TextEditingController _phoneController = TextEditingController();
-  TextEditingController _toleController = TextEditingController();
+
   TextEditingController _jobController = TextEditingController();
-  TextEditingController _kunaController = TextEditingController();
+
   final formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
-    _emailController.text = widget.email;
+    _jobController.text = widget.job;
     _phoneController.text = widget.phone;
     _nameController.text = widget.name;
 
@@ -74,39 +74,6 @@ class _UpdateContactState extends State<UpdateContact> {
                 SizedBox(
                     width: MediaQuery.of(context).size.width * .9,
                     child: TextFormField(
-                      controller: _emailController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        label: Text("Email"),
-                      ),
-                    )),
-                SizedBox(
-                    width: MediaQuery.of(context).size.width * .9,
-                    child: TextFormField(
-                      controller: _toleController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        label: Text("Tole"),
-                      ),
-                    )),
-                SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                    width: MediaQuery.of(context).size.width * .9,
-                    child: TextFormField(
-                      controller: _kunaController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        label: Text("kuna"),
-                      ),
-                    )),
-                SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                    width: MediaQuery.of(context).size.width * .9,
-                    child: TextFormField(
                       controller: _jobController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
@@ -125,10 +92,7 @@ class _UpdateContactState extends State<UpdateContact> {
                             CRUDService().updateContact(
                                 _nameController.text,
                                 _phoneController.text,
-                                _emailController.text,
-                                _toleController.text,
                                 _jobController.text,
-                                _kunaController.text,
                                 widget.docID);
                             Navigator.pop(context);
                           }

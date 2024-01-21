@@ -183,46 +183,10 @@ class _AddContactState extends State<AddContact> {
                 SizedBox(
                     width: MediaQuery.of(context).size.width * .9,
                     child: TextFormField(
-                      controller: _emailController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        label: Text("Email"),
-                      ),
-                    )),
-                SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                    width: MediaQuery.of(context).size.width * .9,
-                    child: TextFormField(
-                      controller: _toleController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        label: Text("Tole"),
-                      ),
-                    )),
-                SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                    width: MediaQuery.of(context).size.width * .9,
-                    child: TextFormField(
-                      controller: _kunaController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        label: Text("kuna"),
-                      ),
-                    )),
-                SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                    width: MediaQuery.of(context).size.width * .9,
-                    child: TextFormField(
                       controller: _jobController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
-                        label: Text("jon"),
+                        label: Text("job"),
                       ),
                     )),
                 SizedBox(
@@ -235,12 +199,10 @@ class _AddContactState extends State<AddContact> {
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
                             CRUDService().addNewContacts(
-                                _nameController.text,
-                                _phoneController.text,
-                                _emailController.text,
-                                _toleController.text,
-                                _jobController.text,
-                                _kunaController.text);
+                              _nameController.text,
+                              _phoneController.text,
+                              _jobController.text,
+                            );
                             Navigator.pop(context);
                           }
                         },

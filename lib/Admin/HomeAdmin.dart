@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:phonetest/Admin/AddFood.dart';
-import 'package:phonetest/Screen/addContactPage.dart';
-import 'package:phonetest/auth/CrudAdmin.dart';
+import 'package:phonetest/Admin/CrudAdmin.dart';
 import 'package:phonetest/widget/AppWidget.dart';
 
 class HomeAdmin extends StatefulWidget {

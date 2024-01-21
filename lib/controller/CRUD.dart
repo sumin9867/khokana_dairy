@@ -1,17 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class CRUDService {
 // add new contacts to firestore
-  Future addNewContacts(String name, String phone, String email, String job,
-      String kuna, String tole) async {
+  Future addNewContacts(
+    String name,
+    String phone,
+    String job,
+  ) async {
     Map<String, dynamic> data = {
       "name": name,
-      "email": email,
       "phone": phone,
       "job": job,
-      "kuna": kuna,
-      "tole": tole
     };
     try {
       await FirebaseFirestore.instance.collection("users").add(data);
@@ -37,16 +36,30 @@ class CRUDService {
     yield* contacts;
   }
 
+  // add multiple contacts to firestore
+  Future addMultipleContacts(List<Map<String, dynamic>> contacts) async {
+    try {
+      for (var contact in contacts) {
+        await FirebaseFirestore.instance.collection("users").add(contact);
+      }
+
+      print("Multiple Documents Added");
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   // update a contact
-  Future updateContact(String name, String phone, String email, String docID,
-      String job, String kuna, String tole) async {
+  Future updateContact(
+    String name,
+    String phone,
+    String docID,
+    String job,
+  ) async {
     Map<String, dynamic> data = {
       "name": name,
-      "email": email,
       "phone": phone,
       "job": job,
-      "kuna": kuna,
-      "tole": tole
     };
     try {
       await FirebaseFirestore.instance
