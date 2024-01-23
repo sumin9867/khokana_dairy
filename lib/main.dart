@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:phonetest/Admin/Admin_login.dart';
 import 'package:phonetest/Admin/CrudAdmin.dart';
 import 'package:phonetest/Screen/addContactPage.dart';
+import 'package:phonetest/Screen/onboarding.dart';
 import 'package:phonetest/Screen/userhome.dart';
 import 'package:phonetest/auth/Login.dart';
 import 'package:phonetest/auth/Signup.dart';
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       routes: {
-        '/': (context) => AdminHomePage(),
+        '/': (context) => Onboarding(),
         '/home': (context) => UserHomepage(),
         '/signup': (context) => SignUp(),
         '/login': (context) => LoginPage(),

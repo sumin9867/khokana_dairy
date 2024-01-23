@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:phonetest/Screen/update.dart';
 import 'package:phonetest/controller/CRUD.dart';
 import 'package:phonetest/controller/auth.dart';
@@ -42,11 +43,15 @@ class _AdminHomePageState extends State<AdminHomePage> {
 
   // to call the contact using url launcher
   callUser(String phone) async {
-    String url = "tel:$phone";
-    if (await canLaunchUrl(Uri.parse(url))) {
-      await launchUrl(Uri.parse(url));
-    } else {
-      throw "Could not launch $url ";
+    try {
+      bool? res = await FlutterPhoneDirectCaller.callNumber(phone);
+      if (res != null && res) {
+        print("Phone call successful");
+      } else {
+        throw "Could not make a phone call to $phone";
+      }
+    } catch (e) {
+      print("Error making a phone call: $e");
     }
   }
 
@@ -54,94 +59,6 @@ class _AdminHomePageState extends State<AdminHomePage> {
 
   Future<void> addMultipleContactsOnInit() async {
     List<Map<String, dynamic>> contacts = [
-      // {"name": "अष्टमान महर्जन", "phone": "९८४१४११३३३", "job": "नोकरी"},
-      // {"name": "असन महर्जन", "phone": "९८४९२८६०७२", "job": "नोकरी"},
-      // {"name": "असोज कुमार महर्जन", "phone": "९८६३५२३८२९", "job": "समाजसेवा"},
-      // {
-      //   "name": "अस्तेन्द्र कुमार महर्जन पुनवी दोबु",
-      //   "phone": "९८१३७५४४६५",
-      //   "job": "व्यवसाय"
-      // },
-      // {
-      //   "name": "अस्मिता महर्जन (तग) बुंगमती",
-      //   "phone": "९८४१७४२१८६",
-      //   "job": "गृहिणी"
-      // },
-      // {
-      //   "name": "अस्मिता महर्जन (मेछ्यो) सुन्धारा",
-      //   "phone": "९८४३०९६६००",
-      //   "job": "गृहिणी"
-      // },
-      // {"name": "आकाश थापा", "phone": "९८२३४५०७३६", "job": "विद्यार्थी"},
-      // {"name": "आकृती थापा", "phone": "९८१३५२१०९५", "job": "विद्यार्थी"},
-      // {
-      //   "name": "आर्जिन महर्जन (बजीमनकु।",
-      //   "phone": "९८४२५७१३४४",
-      //   "job": "विद्यार्थी"
-      // },
-      // {
-      //   "name": "आर्यन डंगोल (लाइटर) दुन्छे",
-      //   "phone": "९८४०००४९०७",
-      //   "job": "विद्यार्थी"
-      // },
-      // {
-      //   "name": "आर्यन महर्जन (उराय)",
-      //   "phone": "९८४९५११५४४",
-      //   "job": "विद्यार्थी"
-      // },
-      // {
-      //   "name": "आवाज महर्जन (व्याँ) व्यागलबु",
-      //   "phone": "९८६४२७३२६७",
-      //   "job": "म मार्केटिङ्ग"
-      // },
-      // {
-      //   "name": "आशा रत्न डंगोल (माद्यो) दोबु",
-      //   "phone": "९८४९१३४४९५",
-      //   "job": "व्यवसाय"
-      // },
-      // {
-      //   "name": "आशा राम महर्जन (व्याँ) व्यागलबु",
-      //   "phone": "०१५५९२९१२",
-      //   "job": "९८६०२१३७२८"
-      // },
-      // {
-      //   "name": "डकर्मी",
-      //   "phone": "डकर्मी",
-      //   "job": "आशिष डंगोल (वामुख्वा) तखाछें",
-      //   "phone": "९८२३१८२४६३",
-      //   "job": "विद्यार्थी"
-      // },
-      // {
-      //   "name": "आशिष महर्जन (ब्रम्हा) न्हयोबु",
-      //   "phone": "९८४०००७०८",
-      //   "job": "विद्यार्थी"
-      // },
-      // {
-      //   "name": "आष्मा डंगोल (लाइटर) दुन्छे",
-      //   "phone": "९८४३१७९५९५",
-      //   "job": "नोकरी"
-      // },
-      // {
-      //   "name": "इच्छा महर्जन (तग)",
-      //   "phone": "खोकना दोवादा",
-      //   "job": "इन्जिनियर"
-      // },
-      // {
-      //   "name": "इन्द्र माया महर्जन (लोकमा) तन्चा",
-      //   "phone": "९८०८६४४०७३",
-      //   "job": "गृहिणी"
-      // },
-      // {
-      //   "name": "इशवरी डंगोल (मैन) तन्चा",
-      //   "phone": "९८६११३८३५४",
-      //   "job": "गृहिणी"
-      // },
-      // {
-      //   "name": "ईन्द्र बहादुर डंगोल (धेर) न्हयोबु",
-      //   "phone": "९८६७०५३९७९",
-      //   "job": "डकर्मी"
-      // },
-
       // Add more contacts as needed
     ];
 
@@ -200,23 +117,6 @@ class _AdminHomePageState extends State<AdminHomePage> {
       drawer: Drawer(
           child: ListView(
         children: [
-          DrawerHeader(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CircleAvatar(
-                maxRadius: 32,
-                child: Text(FirebaseAuth.instance.currentUser!.email
-                    .toString()[0]
-                    .toUpperCase()),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(FirebaseAuth.instance.currentUser!.email.toString())
-            ],
-          )),
           ListTile(
             onTap: () {
               AuthService().logout();
@@ -250,28 +150,6 @@ class _AdminHomePageState extends State<AdminHomePage> {
                         .map((DocumentSnapshot document) {
                           Map<String, dynamic> data =
                               document.data()! as Map<String, dynamic>;
-                          // return ListTile(
-                          //   onLongPress: () => Navigator.push(
-                          //       context,
-                          //       MaterialPageRoute(
-                          //           builder: (context) => UpdateContact(
-                          //               name: data["name"],
-                          //               phone: data["phone"],
-                          //               job: data["job"],
-                          //               docID: document.id))),
-                          //   leading: CircleAvatar(child: Text(data["name"][0])),
-                          //   title: Text(data["name"]),
-                          //   subtitle: Text(data["phone"]),
-                          //   trailing: IconButton(
-                          //     icon: Icon(Icons.call),
-                          //     onPressed: () {
-                          //       setState(() {
-                          //         callUser(data["phone"]);
-                          //       });
-                          //       callUser(data["phone"]);
-                          //     },
-                          //   ),
-                          // );
 
                           return ListTile(
                             contentPadding: EdgeInsets.symmetric(

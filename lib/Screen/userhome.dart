@@ -196,14 +196,6 @@ class _UserHomepageState extends State<UserHomepage> {
                               callUser(data["phone"]);
                             },
                           ),
-                          onLongPress: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => UpdateContact(
-                                      name: data["name"],
-                                      phone: data["phone"],
-                                      job: data["job"],
-                                      docID: document.id))),
                         );
                       })
                       .toList()

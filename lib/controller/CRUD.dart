@@ -4,7 +4,7 @@ class CRUDService {
 // add new contacts to firestore
   Future addNewContacts(
     String name,
-    String phone,
+    dynamic phone, // Change type to dynamic
     String job,
   ) async {
     Map<String, dynamic> data = {
@@ -25,7 +25,7 @@ class CRUDService {
     var contactsQuery =
         FirebaseFirestore.instance.collection("users").orderBy("name");
 
-    // a filter to perfom search
+    // a filter to perform search
     if (searchQuery != null && searchQuery.isNotEmpty) {
       String searchEnd = searchQuery + "\uf8ff";
       contactsQuery = contactsQuery.where("name",
@@ -52,7 +52,7 @@ class CRUDService {
   // update a contact
   Future updateContact(
     String name,
-    String phone,
+    dynamic phone, // Change type to dynamic
     String docID,
     String job,
   ) async {
@@ -66,7 +66,7 @@ class CRUDService {
           .collection("users")
           .doc(docID)
           .update(data);
-      print("Document Upated");
+      print("Document Updated");
     } catch (e) {
       print(e.toString());
     }

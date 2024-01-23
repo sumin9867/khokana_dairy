@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:phonetest/Screen/userhome.dart';
+import 'package:phonetest/auth/forgotpw.dart';
 import 'package:phonetest/controller/auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -31,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
       // Auto-login if credentials are stored
       _emailController.text = storedEmail;
       _passwordController.text = storedPassword;
-      _login();
+      await _login(); // Wait for the login process to complete
     }
   }
 
@@ -47,12 +48,16 @@ class _LoginPageState extends State<LoginPage> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('user_email', _emailController.text);
       prefs.setString('user_password', _passwordController.text);
+      prefs.setBool('isLoggedIn', true);
+
+      print("isLoggedIn: true"); // Add this line
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Login Successful'),
         ),
       );
+
       Navigator.pushReplacementNamed(context, "/home");
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -209,11 +214,21 @@ class _LoginPageState extends State<LoginPage> {
                             padding: const EdgeInsets.only(right: 10),
                             child: FadeInUp(
                                 duration: Duration(milliseconds: 2000),
-                                child: Text(
-                                  "Forgot Password?",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      color: Color.fromRGBO(143, 148, 251, 1)),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ForgotPassword()));
+                                  },
+                                  child: Text(
+                                    "Forgot Password?",
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        color:
+                                            Color.fromRGBO(143, 148, 251, 1)),
+                                  ),
                                 )),
                           ),
                         ],
@@ -307,7 +322,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.1,
+                        height: MediaQuery.of(context).size.height * 0.08,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
