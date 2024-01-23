@@ -135,11 +135,8 @@ class AddContact extends StatefulWidget {
 
 class _AddContactState extends State<AddContact> {
   TextEditingController _nameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
   TextEditingController _phoneController = TextEditingController();
-  TextEditingController _toleController = TextEditingController();
   TextEditingController _jobController = TextEditingController();
-  TextEditingController _kunaController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {

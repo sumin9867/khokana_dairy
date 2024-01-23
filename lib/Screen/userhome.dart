@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:phonetest/Screen/update.dart';
 import 'package:phonetest/controller/CRUD.dart';
 import 'package:phonetest/controller/auth.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
